@@ -1,0 +1,188 @@
+package javaExam;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javaExam.MemberDTO;
+
+//////                       ////////        
+////// 가상의 테이블 member 설정  ////////
+//////                      ////////
+
+
+public class MemberDAO {	
+	
+	PreparedStatement psmt = null;
+	Connection conn = null;
+	ResultSet rs = null;
+
+	
+	public void getConn() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user_id = "hr";
+			String user_pw = "hr";
+
+			conn = DriverManager.getConnection(url, user_id, user_pw);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void close() {
+		try {
+			if (rs != null)
+				rs.close();
+			if (psmt != null)
+				psmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// =====================================================
+	// 1.회원가입
+	
+	public int join(String id, String pw, String nick) {
+
+		int row = 0;
+
+		getConn();
+
+		try {
+
+			String sql = "insert into member Values(?,?,?)";
+
+	
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+			psmt.setString(3, nick);
+		
+
+			row = psmt.executeUpdate();
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+
+
+		}
+		return row;
+	}
+	
+	// =====================================================
+	// 2. 로그인
+	
+	public MemberDTO login(String id, String pw) {	
+		MemberDTO dto = null;
+
+		try {
+			getConn();
+			String sql = "select * from member where id = ? and pw = ?";
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				String uid = rs.getString(1);
+				String upw = rs.getString(2);
+				String unick = rs.getString(3);			
+
+				dto = new MemberDTO(uid, upw, unick);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			close();
+
+
+		}
+		return dto;
+
+	}
+	
+	// =====================================================
+	// 3. 전체회원조희
+	
+	public ArrayList<MemberDTO> selectAll() {
+
+		ArrayList<MemberDTO> list = new ArrayList<MemberDTO>();
+
+		try {
+			getConn();
+
+			String sql = "select * from member";
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+
+				String uid = rs.getString("id");
+				String upw = rs.getString("pw");
+				String unick = rs.getString("nick");
+
+				MemberDTO dto = new MemberDTO(uid, upw, unick);			
+				list.add(dto);
+			
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return list;
+	}
+
+	// =====================================================
+    // 4. 회원정보수정
+	
+	public int update(String id, String pw, String nick) {
+
+		int row = 0;
+
+		try {
+			getConn();
+
+
+			String sql = "update member set nick = ? where id = ? and pw = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, nick);
+			psmt.setString(2, id);
+			psmt.setString(3, pw);
+			
+			row = psmt.executeUpdate();
+
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close();
+
+
+		}
+		return row;
+
+	}
+	
+}

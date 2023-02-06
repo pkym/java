@@ -1,0 +1,31 @@
+package javapractice;
+
+import java.util.Scanner;
+
+public class f6 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("현재몸무게: ");
+		int nowW=sc.nextInt();	
+		System.out.print("목표몸무게: ");
+		int goalW=sc.nextInt();
+		int week=1;
+		while(nowW<goalW) {
+			System.out.println(week+"주차 감량 몸무게: ");
+			int loseW=sc.nextInt();
+			week++;
+			nowW-=loseW;	
+			
+		}
+		System.out.println(nowW+"kg 달성!! 축하합니다!");
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

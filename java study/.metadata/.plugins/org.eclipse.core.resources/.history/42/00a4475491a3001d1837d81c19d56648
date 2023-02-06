@@ -1,0 +1,8 @@
+package javaExam;
+
+public class Mario extends  {
+	public static void start() {
+		System.out.println("귀여운 Mario 게임 시작!");
+	}
+
+}

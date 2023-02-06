@@ -1,0 +1,10 @@
+package javaExam;
+
+public class Question {
+	
+	public static void insert(game) {
+		game.start();
+	}
+
+	
+}

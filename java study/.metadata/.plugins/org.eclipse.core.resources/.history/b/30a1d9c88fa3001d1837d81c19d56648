@@ -1,0 +1,16 @@
+package javaExam;
+
+public class main {
+
+	public static void main(String[] args) {
+		Zelda game1 = new Zelda();
+		Mario game2 = new Mario();
+		JustDance game3 = new JustDance();
+		
+		insert(game1);
+		
+
+	}
+
+	
+}

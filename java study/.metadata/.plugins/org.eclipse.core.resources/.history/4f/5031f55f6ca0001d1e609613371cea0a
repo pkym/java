@@ -1,0 +1,19 @@
+package javapractice;
+
+import java.util.Random;
+
+public class f10 {
+
+	public static void main(String[] args) {
+
+		Random r = new Random();
+		int num1 = r.nextInt(9);
+		int num2 = r.nextInt(9);
+		while(num1!=0&&num2!=0) {
+			System.out.println(num1+num2);
+			
+		}
+
+	}
+
+}

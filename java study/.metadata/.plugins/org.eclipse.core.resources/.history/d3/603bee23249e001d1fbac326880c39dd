@@ -1,0 +1,116 @@
+package javafestival02;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class ex01담당 {
+
+	public static void main(String[] args) {
+		// 1. 로또뽑기
+
+		Random r = new Random();
+		int[] array = new int[6];
+
+		for (int i = 0; i < array.length; i++) {
+			array[i] = r.nextInt(45) + 1;
+			for (int j = 0; j < i; j++) {
+				if (array[i] == array[j]) {
+					i--;
+				}
+			}
+		}
+		for (int n : array) {
+			System.out.println("행운의 숫자 : " + n);
+		}
+
+		// 3. 단 수와 곱해지길 원하는 수를 입력
+		Scanner sc = new Scanner(System.in);
+		System.out.println("단수입력:");
+		int num1 = sc.nextInt();
+		System.out.println("어느 수까지 출력 : ");
+		int num2 = sc.nextInt();
+
+		System.out.println(num1 + "단");
+		for (int i = 0; i < num2; i++) {
+			System.out.printf("%d*%d=%d", num1, i + 1, num1 + i + 1);
+			System.out.println();
+		}
+
+		// 5. 두개 숫자 뽑아 거리 비교 후 작은 위치 출력
+		int[] point = { 92, 32, 52, 9, 81, 2, 68 };
+
+		int length = 0;
+		int min = 100;
+		int n1 = 0, n2 = 0;
+
+		for (int j = 0; j < point.length; j++) {
+			for (int i = 0; i < point.length; i++) {
+				if (point[j] > point[i]) {
+					length = point[j] - point[i];
+					if (length < min) {
+						min = length;
+						n1 = j;
+						n2 = i;
+					}
+				}
+			}
+		}
+		System.out.printf("result=[%d,%d]", n1, n2);
+		System.out.println();
+
+		// 7. 5개의 정수를 입력 받아 오름차순으로 정렬하시오
+		int[] arr = new int[5];
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print((i + 1) + "번째 수 입력 : ");
+			arr[i] = sc.nextInt();
+		}
+		int temp = 0;
+		for (int j = 0; j < arr.length; j++) {
+			for (int i = 0; i < arr.length; i++) {
+				if (arr[j] < arr[i]) {
+					temp = arr[j];
+					arr[j] = arr[i];
+					arr[i] = temp;
+				}
+			}
+		}
+		System.out.println("정렬 후");
+		for (int n : arr) {
+			System.out.print(n + " ");
+		}
+
+		// 9. N과 X를 입력 받아 X보다 작은 수만 출력
+		System.out.print("N 입력>> ");
+		int N = sc.nextInt();
+		System.out.print("X 입력>> ");
+		int X = sc.nextInt();
+		int[] array1 = new int[N];
+
+		for (int i = 0; i < N; i++) {
+			System.out.print((i + 1) + "번째 정수 입력");
+			array1[i] = sc.nextInt();
+		}
+		System.out.print("결과 >> ");
+
+		for (int i = 0; i < N; i++) {
+			if (array1[i] < X) {
+				System.out.print(array1[i] + " ");
+			}
+		}
+		System.out.println();
+
+		// 11. 세자리수 곱하기 세자리수
+
+		System.out.print("첫 번째 숫자 입력>> ");
+		int input1 = sc.nextInt();
+		System.out.print("두 번째 숫자 입력>> ");
+		int input2 = sc.nextInt();
+
+		System.out.println(input1 * (input2 % 10));
+		System.out.println(input1 * (input2 % 100 / 10));
+		System.out.println(input1 * (input2 / 100));
+		System.out.println(input1 * input2);
+
+	}
+
+}

@@ -1,0 +1,30 @@
+package javafestival02;
+
+import java.util.Scanner;
+
+public class ex12채점하기 {
+
+	public static void main(String[] args) {
+		// 맞을 때는 점수가 1점씩 누적하다가
+		// 틀리면 다시 0점이 되는 총점 프로그램을 작성하시오
+		System.out.println("==== 채점하기 ====");
+		Scanner sc = new Scanner(System.in);		
+		
+
+		int sum = 0;
+
+		
+		String[] ox = sc.next().split("");
+		for(int i =0;i<ox.length;i++) {
+		int num=1;
+		if(ox.equals("o")) {
+			sum+=num;
+			num++;
+		}
+		}
+		System.out.println(sum);
+		
+
+	}
+
+}

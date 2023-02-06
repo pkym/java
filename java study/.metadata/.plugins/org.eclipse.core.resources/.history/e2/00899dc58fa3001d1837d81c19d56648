@@ -1,0 +1,16 @@
+package javaExam;
+
+public class Question {
+	
+	public static void insert(Question game) {	
+		
+		game.start();
+	}
+
+	private void start() {
+		System.out.println("그래픽이 황홀한 zelda 시작!");
+		
+	}
+
+	
+}

@@ -1,0 +1,360 @@
+package mvc;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+import javazoom.jl.player.MP3Player;
+import mvc.memberDAO;
+import mvc.memberDTO;
+
+public class main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println();
+		memberDAO dao = new memberDAO();
+		logDAO dao1 = new logDAO();
+		quizDAO dao2 = new quizDAO();
+		// 아스키코드 클래스객체
+		askii askii = new askii();
+		MusicCon con = new MusicCon();
+		MP3Player mp3 = new MP3Player();
+		askii.java();
+
+		// 1. 회원가입-join class 그대로 가져오기
+		try {
+			while (true) {
+				int mark = 1;
+				int life = 4;
+				con.play(7);
+				System.out.print("[1]회원가입 [2]로그인 [3]랭킹보기 [4]게임종료 >> ");
+				int choice = sc.nextInt();
+				System.out.println();
+				if (choice == 1) {
+					System.out.println("********************************************************");
+					System.out.print("ID입력: ");
+					String id = sc.next();
+					System.out.print("PW입력: ");
+					String pw = sc.next();
+					System.out.print("이름입력: ");
+					String name = sc.next();
+
+					int row = dao.join(id, pw, name);
+
+					if (row > 0) {
+						System.out.println("회원가입 성공");
+						System.out.println("*************************************************************");
+					} else {
+						System.out.println("회원가입 실패");
+						System.out.println("*************************************************************");
+					}
+
+					// 2. 로그인
+				} else if (choice == 2) {
+					System.out.println("*************************************************************");
+					System.out.print("ID입력: ");
+					String id = sc.next();
+					System.out.print("PW입력: ");
+					String pw = sc.next();
+
+					memberDTO dto = dao.login(id, pw);
+
+					if (dto != null) {
+
+						System.out.println();
+						System.out.println("로그인 성공!!!!");
+						System.out.println(">>  " + dto.getName() + "  <<님 환영합니다");
+						System.out.println();
+						System.out.println("*************************************************************");
+
+						//////////// 게임시작0. 모드선택/////////////////
+						System.out.println();
+						System.out.println("=======================게임모드를 선택하세요========================");
+						System.out.println();
+						System.out.print("[1]스토리모드 [2]무한모드 >> ");
+						int modChoice = sc.nextInt();
+						System.out.println();
+						if (modChoice == 1) {
+							System.out.println("********************스토리 모드를 선택하셨습니다******************");
+							System.out.println();
+
+							//////////// 게임시작1. 캐릭터선택/////////////////
+							// chrt 캐릭터번호 변수
+							System.out.println();
+							System.out.println("=========================캐릭터를 선택하세요======================");
+							System.out.println();
+							System.out.print("[1]안미연 [2]기영민 [3]한성규 [4]최근호 [5]조준수 >> ");
+							int chrt = sc.nextInt();
+							// 준수선택
+							if (chrt == 5) {
+								System.out.println();
+								askii.notfound();
+								System.out.println("아무래도..그는..이 곳을 떠난 것 같다..");
+								System.out.println("=================================================================");
+								System.out.println();
+								continue;
+								// 미연선택
+							} else if (chrt == 1) {
+								askii.car();
+								life--;
+								// 영민선택
+							} else if (chrt == 2) {
+								askii.bus();
+
+								// 성규선택
+							} else if (chrt == 3) {
+								askii.coffee();
+								life++;
+								// 근호선택
+							} else if (chrt == 4) {
+								askii.walk();
+								// 미선택
+							} else {
+								System.out.println("제대로 된 사람을 선택해주세요");
+							}
+							/////////////// 게임시작2. 수업진행////////////////////////
+							System.out.println("============================담임등장===========================");
+							System.out.println();
+							askii.kkn();
+							System.out.println("\r\n" + "우리 빅데이터반은 1교시 자바 수업 부터 시작 하겠습니다.\r\n");
+
+							/////////////////// 첫번째 문제//////////////////////
+							String mod = "story";
+							String[] arrevent = { "형선", "기현", "소현", "하은" };
+							String[] arrteacher = { "현진쌤", "경남쌤", "누군가", "병관쌤", "인호쌤" };
+							int cnt = 0;
+							String[] arrline = { "자~... 여러부운~ 이번 시간은 저번시간에\r\n" + "배웠던...것들로문제를 풀어보도록 할꺼에요~\r\n",
+									"여러분 저는 어제도 회의하느라 9시에 퇴근했답니다.\r\n" + "문제 풀다가 수업도중에 화장실 안되요 후훗(단호)~ 그럼 문제 풀어볼까요?",
+									"",
+									"여러분~ 호두아빠 유튜브 구독 하셨나요? 구독과 좋아요는 땡큐베리마취~ \r\n"
+											+ "여러분이 ~ 이제껏 배우신 알고리즘 문제들을 마음껏 풀어주시기 바랍니다~\r\n",
+									"여러분이 개발자가 되려면 데이타베이스 이걸 알아야합니다\r\n+하지만 문제를 풀고 맞추는 것도 중요하지만 사회생활에서 가장 중요한것은 인간관계 인데요 이게 가장 중요해요\r\n" };
+							String[] arrline2 = {
+									"우리반 마이스터고 출신 >형선<씨가 나에게 도움을 요청했다(왜지....? 의문....)\r\n\n"
+											+ "미연:(수업시간에 매일 졸더니 다시 열심히 해볼 마음이 생긴건가?)\r\n",
+									"우리반의 모범생 젠틀하고 친절한 기현이가 카톡으로 도움을 요청했다\r\n\n"
+											+ "영민: 뭐지..? 수업 중에 갑자기 왠 카톡? (두근두근)\r\n",
+									"빅데이터 우리반에 98년생 동갑내기 퀸카 소현이가 나에게 도움을 요청했다 \r\n\n"
+											+ "성규: 평소에 인사조차 하기 힘든 소현씨가 나에게....???(두근두근)\r\n",
+									"우리반의 꽃 하은 누나가 나에게 도움을 요청했다\r\n\n" + "근호: 어?? 뭐지??  (흠칫? 놀람..두근두근...)\r\n" };
+							System.out.println();
+							System.out.println("========================수업을 시작합니다========================");
+							System.out.println("현재 라이프 >> S2 S2 S2");
+
+							for (int i = 1; i <= 9; i++) {
+								ArrayList<quizDTO> list1 = dao2.quizprint(i);
+								if (i == 1 || i == 3 || i == 6 || i == 8) {
+									System.out.println();
+									System.out.print("***********************<" + (cnt + 1) + "교시> ");
+									System.out.println(arrteacher[cnt] + " 등장***********************");
+									System.out.println(arrline[cnt]);
+									con.play(cnt);
+									cnt++;
+
+									//////////////// 점심시간 이벤트/////////////////
+								} else if (i == 5) {
+
+									con.play(2);
+									System.out.println();
+									System.out.print("***********************<" + (cnt + 1) + "교시> ");
+									System.out.println(arrteacher[cnt] + " 등장***********************");
+									for (int num = 1; num < 5; num++) {
+										if (chrt == num) {
+											System.out.println(arrline2[chrt - 1]);
+											System.out.print("[1] 기쁜 마음으로 알려준다 (승낙)\r\n" + "\r\n"
+													+ "[2] 내가 왜? 너에게 알려줘야 할 이유라도 대보던지 (거절)\r\n" + "\r\n"
+													+ "[3] 미안, 나도 수업 이해를 못했어 (완곡)\r\n\n" + "어떻게 대답하지..? >> ");
+											int ans = sc.nextInt();
+											System.out.println();
+
+											if (ans == 1) {
+												System.out.println("저.. 혹시 다음의 개념을 아나요..?\r\n"
+														+ "'구체적인 사물들의 공통적인 특징을 파악해서 이를 하나의 개념(집합)으로 다루는 것' \r\n"
+														+ "\r\n" + "1) 상속\r\n" + "2) 추상화\r\n" + "3) 캡슐화\r\n"
+														+ "4) 다형성\r\n" + "");
+												int ans1 = sc.nextInt();
+												if (ans1 == 2) {
+													System.out.println("고마워요...! 자바실력이 올랐어요");
+													life++;
+													System.out.println("라이프가 1 증가합니다~ S2");
+													System.out.println("현재 라이프 : " + life);
+												}
+
+											} else if (ans == 2) {
+												System.out.println("아... 알겠습니다...인성 뭐야...");
+												life--;
+												System.out.println("라이프가 1 감소합니다...");
+												System.out.println("현재 라이프 : " + life);
+
+											} else if (ans == 3) {
+												System.out.println("그럴수도 있죠!! 우리 함께 공부해봐요..!");
+												System.out.println("현재 라이프 : " + life);
+											}
+
+											break;
+
+										}
+
+									}
+									cnt++;
+
+								}
+								System.out.println();
+								System.out.println(">>문제" + i + "<<");
+								System.out.println(list1.get(0).getQuestion());
+								System.out.println();
+								System.out.print("답 입력 : ");
+								int answer1 = sc.nextInt();
+
+								quizDTO dto2 = dao2.storyquiz(i, answer1);
+
+								if (dto2 != null) {
+									System.out.println();
+									System.out.println("정답을 맞추셨습니다");
+									mark = mark + list1.get(0).getMark();
+									System.out.println();
+									System.out.println("현재점수 : " + mark);
+								} else {
+									System.out.println();
+									System.out.println("정답을 틀리셨습니다");
+									life--;
+									System.out.println();
+									System.out.println("현재 라이프 : " + life);
+
+								}
+
+								if (life <= 0) {
+									System.out.println("라이프를 모두 소진 하셨습니다.. 게임끝!!!");
+									break;
+								}
+
+							}
+							///////////////// 엔딩/////////////////////
+							System.out.println("당신의 점수: " + mark);
+							System.out.println();
+							
+							if (life > 0 && mark > 20) {
+								con.play(8);
+								askii.ferari();
+								break;
+
+							} else if (life > 0 && mark < 21 && mark > 15) {
+								con.play(9);
+								askii.normal();
+								break;
+
+							} else if (life > 0 && mark < 16) {
+								con.play(10);
+								askii.blood();
+								break;
+
+							}
+							int row = dao1.insertLog(id, mark, mod);
+							if (row > 0) {
+								System.out.println("기록 저장 성공");
+							} else {
+								System.out.println("기록 저장 실패");
+							}
+							System.out.println();
+
+						} else if (modChoice == 2) {
+							/////// 무한모드 선택
+							mark = 0;
+							life = 5;
+							System.out.println("==================무한모드를 도전합니다==================");
+							System.out.println("*********기회는 3번!! 틀리면 게임이 종료합니다*******");
+							Random r = new Random();
+							String mod = "infinity";
+							int i = 1;
+							con.play(11);
+
+							// 중복없이 어레이에 숫자 담기
+							int num = 0;
+							int[] array = new int[16];
+
+							for (int j = 0; j < array.length; j++) {
+								array[j] = r.nextInt(16) + 10;
+								for (int k = 0; k < j; k++) {
+									if (array[j] == array[k]) {
+										j--;
+									}
+								}
+							}
+							// 무한으로 문제 끌어오기
+							while (true) {
+								ArrayList<quizDTO> list = dao2.quizprint(array[num]);
+								System.out.println(num + 1 + "번째 문제");
+								System.out.println(list.get(0).getQuestion());
+								System.out.println();
+								System.out.print("답 입력 : ");
+								int answer = sc.nextInt();
+
+								quizDTO dto2 = dao2.infquiz(array[num], answer);
+
+								if (dto2 != null) {
+									System.out.println();
+									System.out.println("***정답을 맞추셨습니다***");
+									System.out.println();
+									mark = mark + list.get(0).getMark();
+								} else {
+									System.out.println();
+									System.out.println("***정답을 틀리셨습니다***");
+									System.out.println();
+									life--;
+									System.out.println("현재 라이프 : " + life);
+								}
+
+								num++;
+
+								if (life == 0) {
+									if (mp3.isPlaying() == true) {
+										mp3.stop();
+									}
+									System.out.println("게임이 종료되었습니다");
+									System.out.println("점수 : " + mark);
+									int row = dao1.insertLog(id, mark, mod);
+
+									if (row > 0) {
+										System.out.println("기록 저장 성공");
+										System.out.println();
+									} else {
+										System.out.println("기록 저장 실패");
+									}
+									break;
+								}
+
+							}
+
+						}
+					} else {
+						System.out.println("로그인 실패");
+					}
+
+					// 3. 점수보기
+				} else if (choice == 3) {
+					System.out.print("아이디를 입력하세요: ");
+					String id = sc.next();
+					ArrayList<logDTO> list = dao1.selectID(id);
+					System.out.println("아이디\t점수\t모드\t시간\t");
+					int cnt = 0;
+					for (logDTO n : list) {
+						System.out.println(n.getId() + "\t" + n.getMark() + "\t" + n.getMod() + "\t" + n.getTime());
+					}
+
+				} else if (choice == 4) {
+					System.out.println("게임을 종료합니다");
+					break;
+
+				} else {
+					System.out.println("제대로 된 번호를 입력해주세요");
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("숫자만 입력하세요");
+
+		}
+
+	}
+
+}

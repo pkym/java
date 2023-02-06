@@ -1,0 +1,10 @@
+package javaExam;
+
+public class MemberDTO {
+	String id;
+	String pw;
+	String nick;
+	
+	
+	
+}

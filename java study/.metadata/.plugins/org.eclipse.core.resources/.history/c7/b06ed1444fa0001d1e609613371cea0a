@@ -1,0 +1,36 @@
+package javapractice;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class ex2홀수 {
+
+	public static void main(String[] args) {
+
+		Random r = new Random();
+		int[] array= new int[6];
+		for(int j=0;j<6;j++) {				
+			array[j]=r.nextInt(44)+1;
+			for(int i=0;i<j;i++) {
+				if(array[j]==array[i]) {
+					j--;
+				}
+			
+			}
+		}
+		
+		for(int n : array) {
+			System.out.println("행운의 숫자 :  "+n);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

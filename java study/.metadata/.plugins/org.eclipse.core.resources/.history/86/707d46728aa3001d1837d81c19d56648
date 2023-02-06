@@ -1,0 +1,19 @@
+package javaExam;
+
+public class MemberDTO {
+	String id;
+	String pw;
+	String nick;
+	
+	public MemberDTO() {
+		
+	}
+	
+	public MemberDTO(String id, String pw, String nick) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+	}
+
+}

@@ -1,0 +1,29 @@
+package javapractice;
+
+import java.util.Random;
+
+public class f2 {
+
+	public static void main(String[] args) {
+		int[] array = new int[8];
+		Random r = new Random();
+		System.out.print("배열에 있는 모든 값: ");
+		for (int i = 0; i < 8; i++) {
+			array[i] = r.nextInt(99);
+			System.out.print(array[i]+" ");
+		}
+		int max = array[0], min = array[0];
+		for (int i = 0; i < 8; i++) {
+			if (array[i] < min) {
+				min = array[i];
+			}
+			if (array[i] > max) {
+				max = array[i];
+			}
+		}System.out.println();
+		System.out.println("가장 큰 값: " + max);
+		System.out.println("가장 큰 값: " + min);
+
+	}
+
+}

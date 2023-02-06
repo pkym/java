@@ -1,0 +1,35 @@
+package javafestival02;
+
+import java.util.Random;
+
+public class ex05두숫자뽑아거리비교 {
+
+	public static void main(String[] args) {
+		// 1차원 배열에서 두 개의 숫자를 뽑아 서로의 거리를 비교한 후
+		// 거리가 가장 작은 숫자의 위치(index)를 출력하시오
+
+		int[] point = { 92, 32, 52, 9, 2, 2, 68 };
+		int length = 0;
+		int min = 100;
+		int num1 = 0, num2 = 0;
+
+		for (int j = 0; j < point.length; j++) {
+			for (int i = 0; i < point.length; i++) {
+				if (point[j] >= point[i] && i != j) {
+					length = point[j] - point[i];
+					if (min >= length) {
+						min = length;
+						num1 = j;
+						num2 = i;
+					}
+
+				}
+
+			}
+		}
+
+		System.out.printf("result=[%d,%d]", num1, num2);
+
+	}
+
+}

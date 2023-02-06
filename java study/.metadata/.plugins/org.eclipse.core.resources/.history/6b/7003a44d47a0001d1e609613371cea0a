@@ -1,0 +1,32 @@
+package javapractice;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class ex2홀수 {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		System.out.print("입력>>  ");
+		String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String abc = "abcdefghijklmnopqrstuvwxyz";
+		String[] input = sc.nextLine().split("");
+		String[] ARRAY = ABC.split("");
+		String[] array = abc.split("");
+
+		for (int j = 0; j < array.length; j++) {
+			System.out.println(array[j] + " : ");
+			int cnt = 0;
+			for (int i = 0; i < input.length; i++) {
+				if (input[i].equals(array[j]) || input[i].equals(ARRAY[j])) {
+					cnt++;
+				}
+			}
+			System.out.println(cnt);
+
+		}
+
+	}
+
+}
